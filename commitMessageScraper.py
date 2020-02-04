@@ -66,7 +66,7 @@ def keyword_test(file_name, test_result_name):
 scraps commit messages from the diff files
 '''
 
-def scrape_message(message_file_name, diff_folder):
+def scrap_message(message_file_name, diff_folder):
     ## extract OpenSource folder names
     path = os.getcwd() + diff_folder
     dir_list = [e for e in os.listdir(path) if (os.path.isdir(path + e) and e[0] != '.')]
@@ -123,7 +123,7 @@ def main():
     least_diff_folder = '/least_cve/'
     least_test_name = "least_keywordTest.txt"
 
-    scrape_message(least_msg_file_name, least_diff_folder)
+    scrap_message(least_msg_file_name, least_diff_folder)
     keyword_test(least_msg_file_name, least_test_name)
 
 
