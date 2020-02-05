@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="yjkellyjoo.nvd.dao.StatusDao">
+
+	<resultMap id="StatusDataMap" type="yjkellyjoo.nvd.model.StatusVo">
+		<id column="TYPE" property="type" />
+		<result column="TIMESTAMP" property="timestamp" />  			
+		<result column="RAW_DATA" property="rawData" /> 
+	</resultMap>
+
+	<sql id="selectStatusSql">
+		SELECT 
+			T.TYPE, 
+			T.TIMESTAMP, 
+			T.RAW_DATA
+		FROM
+			TB_STATUS AS T
+	</sql>
+	
+	<select id="selectStatus" resultMap="StatusDataMap">
+		<include refid="selectStatusSql" />
+		WHERE 
+			T.TYPE = #{type}	
+    	/* yjkellyjoo.nvd.dao.StatusDao.selectStatus */
+	</select>	
+	
+	<insert id="insertStatus" parameterType="yjkellyjoo.nvd.model.StatusVo">
+		INSERT INTO TB_STATUS (
+			TYPE, 
+			TIMESTAMP, 
+			RAW_DATA
+		) VALUES (
+			#{type}, 
+			#{timestamp}, 
+			#{rawData}
+		)
+		/* yjkellyjoo.nvd.dao.StatusDao.insertStatus */
+	</insert>
+
+	<update id="updateStatus" parameterType="yjkellyjoo.nvd.model.StatusVo">
+		update TB_STATUS set
+			TIMESTAMP = #{timestamp},
+			RAW_DATA = #{rawData}
+		where TYPE = #{type}
+		/* yjkellyjoo.nvd.dao.StatusDao.updateStatus */
+	</update>
+</mapper>

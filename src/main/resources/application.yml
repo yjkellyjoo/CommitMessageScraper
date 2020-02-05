@@ -1,0 +1,27 @@
+# spring
+spring:
+  application:
+    name: NvdDataScraper
+
+#  #profile 설정을 안했을 시 active profile
+#  profiles:
+#    active: local
+
+---
+
+spring:
+#  profiles: local
+  datasources:
+    nvd: 
+      driver-class-name: "com.mysql.cj.jdbc.Driver"
+      url: "jdbc:mysql://127.0.0.1:3306/nvd?useUnicode=true&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&useServerPrepStmts=true&rewriteBatchedStatements=true&characterEncoding=UTF-8&autoReconnect=true&allowMultiQueries=true"
+      username: "nvd"
+      password: "nvdData1!@#"
+    git:
+      driver-class-name: "com.mysql.cj.jdbc.Driver"
+      url: "jdbc:mysql://127.0.0.1:3306/git?useUnicode=true&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&useServerPrepStmts=true&rewriteBatchedStatements=true&characterEncoding=UTF-8&autoReconnect=true&allowMultiQueries=true"
+      username: "git"
+      password: "gitScraper12#"
+    
+mybatis:
+  mapper-locations: "classpath:mybatis/mapper/**/*.xml"
