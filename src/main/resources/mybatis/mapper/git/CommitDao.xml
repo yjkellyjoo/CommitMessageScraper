@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="yjkellyjoo.git.dao.CommitDao">
+
+	<resultMap id="commitMap" type="yjkellyjoo.git.model.CommitVo">
+		<id column="REPONAME" property="reponame"/>
+		<result column="COMMITID" property="commitId"/>
+		<result column="NVDBOOL" property="nvdBool"/>
+		<result column="CVEBOOL" property="cveBool"/>
+		<result column="MESSAGE" property="message"/>
+	</resultMap>
+	
+    <sql id="selectCommitSql">
+		SELECT
+		   COMMIT.REPONAME,
+	       COMMIT.COMMITID,
+	       COMMIT.NVDBOOL,
+	       COMMIT.CVEBOOL,
+	       COMMIT.MESSAGE,
+		FROM
+			TB_COMMIT AS COMMIT
+	</sql>
+	
+	<select id="selectCommit" resultMap="commitMap">
+        <include refid="selectCommitSql" />
+        WHERE
+        COMMIT.NAME = #{reponame}
+        /* yjkellyjoo.git.dao.CommitDao.selectCommit */
+    </select>
+	
+    <insert id="insertCommit" parameterType="yjkellyjoo.git.model.CommitVo">
+		INSERT INTO TB_COMMIT (
+		   REPONAME,
+	       COMMITID,
+	       NVDBOOL,
+	       CVEBOOL,
+	       MESSAGE
+		) VALUES (
+			#{reponame},
+			#{commitId},
+			#{nvdBool},
+			#{cveBool},
+			#{message}
+		)
+		/* yjkellyjoo.git.dao.CommitDao.insertCommit */
+	</insert>
+
+	<insert id="insertAllCommits" parameterType="yjkellyjoo.git.model.CommitVo">
+		INSERT INTO TB_COMMIT (
+		   REPONAME,
+	       COMMITID,
+	       NVDBOOL,
+	       CVEBOOL,
+	       MESSAGE
+		) VALUES
+		    <foreach collection="list" item="item" separator=" , ">
+		    (
+			#{item.reponame},
+			#{item.commitId},
+			#{item.nvdBool},
+			#{item.cveBool},
+			#{item.message}
+			)
+			</foreach>
+		/* yjkellyjoo.git.dao.CommitDao.insertAllCommits */
+	</insert>
+
+	<update id="updateCommit" parameterType="yjkellyjoo.git.model.CommitVo">
+		UPDATE TB_COMMIT SET
+			COMMITID = #{commitId},
+			NVDBOOL = #{nvdBool},
+			CVEBOOL = #{cveBool},
+			MESSAGE = #{message}
+		WHERE REPONAME = #{reponame}
+		/* yjkellyjoo.git.dao.CommitDao.updateCommit */
+	</update>
+	
+</mapper>

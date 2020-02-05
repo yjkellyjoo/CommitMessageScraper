@@ -14,6 +14,11 @@ public class NvdCommitService {
 	@Resource(name = "yjkellyjoo.nvd.dao.CveDao")
 	private CveDao cveDao;
 	
+	public void perform() {
+		
+	}
+	
+	
 	public void scrapGitRef() {
 		
 	}

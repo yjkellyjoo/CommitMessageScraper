@@ -3,30 +3,25 @@ package yjkellyjoo.config;
 import javax.sql.DataSource;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-import com.zaxxer.hikari.HikariDataSource;
 
 
 @Configuration
 public class DatabaseConfiguration {
-	public static final String NVD_DATASOURCE = "NvdDS";
-	public static final String GIT_DATASOURCE = "GitDS";
-
-	@Bean(name = NVD_DATASOURCE, destroyMethod = "")
-	@ConfigurationProperties(prefix = "datasources.nvd")
+	@Bean
 	@Primary
+	@ConfigurationProperties(prefix = "spring.datasources.nvd") 
 	public DataSource dataSourceNvd() {
-		// Filled up with the properties specified about thanks to Spring Boot black magic
-		return new HikariDataSource();
+		return DataSourceBuilder.create().build();
 	}
 	  
-	@Bean(name = GIT_DATASOURCE, destroyMethod = "")
-	@ConfigurationProperties(prefix = "datasource.git")
+	@Bean
+	@ConfigurationProperties(prefix = "spring.datasources.git")
 	public DataSource dataSourceGit() {
-		// Filled up with the properties specified about thanks to Spring Boot black magic
-		return new HikariDataSource();
+		return DataSourceBuilder.create().build();
 	 }
 }

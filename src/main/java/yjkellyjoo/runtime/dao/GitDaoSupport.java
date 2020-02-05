@@ -12,9 +12,9 @@ import lombok.Getter;
  * @since 	2020. 02. 05.
  */
 @Getter
-public abstract class NvdDaoSupport {
+public abstract class GitDaoSupport {
 
-	@Qualifier("dataSourceNvd")
+	@Qualifier("dataSourceGit")
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
